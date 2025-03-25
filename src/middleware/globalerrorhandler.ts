@@ -113,7 +113,7 @@ export const authenticateJWT = async (
 ): Promise<any> => {
 
   try {
-    console.log(req);
+    console.log(util.inspect(req, { depth: null, colors: true }));
     console.log("Authenticating JWT");
     console.log(req.cookies);
 
