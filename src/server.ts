@@ -23,6 +23,7 @@ import cookieParser from 'cookie-parser'
 
 const app = express();
 app.use(cookieParser());
+app.set("trust proxy", true);
 // **** Middleware **** //
 
 // Basic middleware
@@ -44,7 +45,7 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
-app.set("trust proxy", true);
+
 
 app.use(cors(corsOptions));
 // Add APIs, must be after middleware
