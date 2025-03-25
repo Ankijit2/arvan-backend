@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "prisma generate && set NODE_ENV=PRODUCTION & node dist/index.js",
+    "start": "prisma generate && set  && node dist/index.js",
     "build": "npx tsc -p .",
     "dev": "prisma generate && concurrently \"npx tsc -w\" \"nodemon dist/index.js\"",
     "watch": "npx tsc -w"

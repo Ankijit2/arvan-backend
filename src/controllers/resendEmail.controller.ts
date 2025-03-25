@@ -4,7 +4,7 @@ import ENV from '../common/env.js';
 import { ValidationErr } from '../common/routeerror.js';
 import { prisma } from '../utils/prismaclient.js';
 
-const resend = new Resend(ENV.RESEND_API_KEY);
+// const resend = new Resend(ENV.RESEND_API_KEY);
 
 // Utility function to generate email HTML content
 const generateEmailContent = (name: string, email: string, phone: string, message: string): string => {
@@ -51,31 +51,31 @@ const sendEmail = async (req: Request, res: Response): Promise<void> => {
 
   try {
     // Send email using Resend
-    const response = await resend.emails.send({
-      from: ENV.RESEND_EMAIL,
-      to: email,
-      subject: 'New Form Submission Received ✅',
-      html: emailContent,
-    });
+    // const response = await resend.emails.send({
+    //   from: ENV.RESEND_EMAIL,
+    //   to: email,
+    //   subject: 'New Form Submission Received ✅',
+    //   html: emailContent,
+    // });
 
-    if (response.data) {
-      // Save contact form submission to database
-      await prisma.contactForm.create({
-        data: {
-          name,
-          email,
-          phone: String(phone),
-          message,
-          Status: 'Pending',
-        },
-      });
+    // if (response.data) {
+    //   // Save contact form submission to database
+    //   await prisma.contactForm.create({
+    //     data: {
+    //       name,
+    //       email,
+    //       phone: String(phone),
+    //       message,
+    //       Status: 'Pending',
+    //     },
+    //   });
 
-      res.status(200).json({ message: 'Email sent successfully' });
-    } else {
-      console.error('Failed to send email:', response.error);
+    //   res.status(200).json({ message: 'Email sent successfully' });
+    // } else {
+    //   console.error('Failed to send email:', response.error);
       res.status(500).json({ message: 'Failed to send email' });
     }
-  } catch (error) {
+   catch (error) {
     console.error('Error sending email:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
@@ -131,25 +131,25 @@ const updateStatussendMail = async (req: Request, res: Response): Promise<void> 
     const emailContent = generateEmailContent(contact.name, contact.email, contact.phone, message);
 
     // Send email using Resend
-    const response = await resend.emails.send({
-      from: 'Acme <onboarding@resend.dev>',
-      to: contact.email,
-      subject: 'Response to Your Inquiry ✅',
-      html: emailContent,
-    });
+    // const response = await resend.emails.send({
+    //   from: 'Acme <onboarding@resend.dev>',
+    //   to: contact.email,
+    //   subject: 'Response to Your Inquiry ✅',
+    //   html: emailContent,
+    // });
 
-    if (!response.data) {
-      console.error('Failed to send email:', response.error);
-       res.status(500).json({ message: 'Failed to send email' });
-    }
+    // if (!response.data) {
+    //   console.error('Failed to send email:', response.error);
+    //    res.status(500).json({ message: 'Failed to send email' });
+    // }
 
-    // Update status in the database
-    const updatedContact = await prisma.contactForm.update({
-      where: { id: String(id) },
-      data: { Status: Status },
-    });
+    // // Update status in the database
+    // const updatedContact = await prisma.contactForm.update({
+    //   where: { id: String(id) },
+    //   data: { Status: Status },
+    // });
 
-    res.status(200).json({ message: "Email sent and status updated successfully", updatedContact });
+    res.status(200).json({ message: "Email sent and status updated successfully" });
   } catch (error) {
     console.error("Error updating status and sending email:", error);
     res.status(500).json({ message: "Failed to update status and send email" });
