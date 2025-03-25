@@ -7,6 +7,7 @@ import { exceptionCodes } from "../common/prismafilter.js";
 import { decode } from "next-auth/jwt";
 import { prisma } from "../utils/prismaclient.js";
 import axios from "axios";
+import util from "util";
 
 
 const cleanMessage = (message: string) => message.replace(/(\r\n|\r|\n)/g, " ");
@@ -112,7 +113,7 @@ export const authenticateJWT = async (
 ): Promise<any> => {
 
   try {
-    console.log(JSON.stringify(req, null, 2));
+    console.log(util.inspect(req, { depth: null }));
     console.log("Authenticating JWT");
     console.log(req.cookies);
 
