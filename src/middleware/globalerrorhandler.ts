@@ -112,6 +112,7 @@ export const authenticateJWT = async (
 ): Promise<any> => {
 
   try {
+    console.log(JSON.stringify(req, null, 2));
     console.log("Authenticating JWT");
     console.log(req.cookies);
 
