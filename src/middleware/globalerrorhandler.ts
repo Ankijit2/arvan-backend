@@ -113,11 +113,12 @@ export const authenticateJWT = async (
 ): Promise<any> => {
 
   try {
-    console.log(util.inspect(req, { depth: null, colors: true }));
+   
     console.log("Authenticating JWT");
     console.log(req.cookies);
 
-    const sessionToken = await req.cookies[ENV.NODE_ENV === "production" ? "__Secure-authjs.session-token" : "authjs.session-token"];
+    const sessionToken = await req.cookies[ENV.NODE_ENV === "production" ? "__Secure-authjs.session-token" : "authjs.session-token"] || 
+    (req.headers.authorization ? req.headers.authorization.split(' ')[1] : undefined);
 
     console.log(sessionToken);
     if (!sessionToken) {
