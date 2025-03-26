@@ -117,7 +117,7 @@ export const authenticateJWT = async (
     console.log("Authenticating JWT");
     console.log(req.cookies);
 
-    const sessionToken = await req.cookies[ENV.NODE_ENV === "production" ? "__Secure-authjs.session-token" : "authjs.session-token"] || 
+    const sessionToken =
     (req.headers.authorization ? req.headers.authorization.split(' ')[1] : undefined);
 
     console.log(sessionToken);
