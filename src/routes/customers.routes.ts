@@ -5,7 +5,7 @@ const router = Router();
 
 
 //fix routes
-router.get("/allcustomers", customersController.allCustomers);
+router.get("/allcustomers", authenticateJWT,customersController.allCustomers);
 
 router.put("/customer/:id", authenticateJWT,customersController.updatecustomer);
 
@@ -17,10 +17,10 @@ router.post("/customer/address", authenticateJWT,customersController.addAddress)
 
 router.get("/customer", authenticateJWT,customersController.getAddress);
 
-router.get("/otp" ,customersController.getOtpByNumber);
+router.get("/otp" ,authenticateJWT,customersController.getOtpByNumber);
 
 router.post("/verify-otp",customersController.verify_otp);
 
-router.post("/makeAdmin", customersController.makeAdmin);
+router.post("/makeAdmin",authenticateJWT, customersController.makeAdmin);
 
 export default router;
